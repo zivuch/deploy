@@ -6,8 +6,7 @@ This guide will walk you through the process of deploying an NodeJS application 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Requirements](#requirements)
-- [Create a Git repository](#create-a-git-repository)
-  - [Push to GitHub](#push-it-to-github)
+- [Create & Push to a Git repository](#create-a-git-repository)
 - [Create a Render repository](#create-render-account)
 - [Deploy to Render](#deploy-to-render)
 
@@ -20,9 +19,12 @@ This guide will walk you through the process of deploying an NodeJS application 
 - A [GitHub][github] account
 - A [Render][render] account
 
-## Create a Git repository
+## Create & Push to a Git repository
 
 To deploy code on Render, you will need to use [Git][git].
+
+Register a [GitHub][github] account if you haven't already.
+
 
 Add a `.gitignore` file to ignore the `node_modules` directory (dependencies
 will be automatically installed by Render when you push), `package-lock.json` file and `.env` file (if you have an .env file):
@@ -35,6 +37,8 @@ package-lock.json
 # add this if you have an .env file
 .env
 ```
+
+Create a **private** repository on GitHub.
 
 Initialize a Git repository in the application's directory:
 
@@ -65,56 +69,6 @@ Push to GitHub:
 
 ```bash
 $> git push -u origin main
-```
-
-### Push to GitHub
-
-Register a [GitHub][github] account if you haven't already.
-
-Create a **private** repository on GitHub, then add it as a remote on your
-machine and push your new application to it:
-
-```bash
-$> git remote add origin git@github.com:your-github-username/your-repo-name.git
-$> git push -u origin master
-```
-
-If you have team members, you may add them in the repository's settings on
-GitHub so that they also have push access:
-
-![GitHub: manage repository access](./images/github-manage-access.png)
-
-## Connect your application to a database
-
-Add [Mongoose][mongoose] to your application:
-
-```bash
-$> npm install mongoose
-```
-
-Then add the following code to the `app.js` file:
-
-```js
-import mongoose from "mongoose";
-mongoose.connect(
-  process.env.DATABASE_URL || "mongodb://localhost/your-app-name"
-);
-```
-
-> Note the code `process.env.DATABASE_URL ||
-'mongodb://localhost/your-app-name'` which will either take the value of the
-> `$DATABASE_URL` environment variable, or default to
-> `mongodb://localhost/your-app-name` if the environment variable is not
-> available. See https://nodejs.org/api/process.html#process_process_env.
-
-Stage all changes (including the changes made to `package.json` and
-`package-lock.json` as a result of the `npm install mongoose` command). Then
-commit and deploy this change:
-
-```bash
-$> git add .
-$> git commit -m "Connect to a MongoDB database with Mongoose"
-$> git push origin master
 ```
 
 ## Deploy the application to Render
