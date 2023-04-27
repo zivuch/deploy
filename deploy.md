@@ -25,7 +25,6 @@ To deploy code on Render, you will need to use [Git][git].
 
 Register a [GitHub][github] account if you haven't already.
 
-
 Add a `.gitignore` file to ignore the `node_modules` directory (dependencies
 will be automatically installed by Render when you push), `package-lock.json` file and `.env` file (if you have an .env file):
 
@@ -73,7 +72,9 @@ $> git push -u origin main
 
 ## Deploy the application to Render
 
-Register a [Render][render] account if you haven't already. If you register through GitHub, you will not have to link the two accounts together later.
+Register a [Render][render] account if you haven't already.
+
+If you register through GitHub, you will not have to link the two accounts together later.
 
 ![Render: register using an exisiting GitHub Account](./images/render-01-signup.png)
 
@@ -117,90 +118,6 @@ The deployment process should eventually succeed. But... **Oh no there seems to 
 2020-09-13T09:46:13.394716+00:00 app[web.1]: at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
 2020-09-13T09:46:13.394716+00:00 app[web.1]: at processTicksAndRejections (internal/process/task_queues.js:84:21)
 ```
-
-Remember this piece of code?
-
-```js
-mongoose.connect(
-  process.env.DATABASE_URL || "mongodb://localhost/your-app-name"
-);
-```
-
-At this point, our app is looking for a `DATABASE_URL` variable environment. Unfortunately we have not configured it yet and are therefore trying to connect to our local Mongo instance which is obviously inaccessible from remotely.
-
-We must therefore setup a database elsewhere and provide its URL to Render. Let's start by setting up a [MongoDB Atlas][mongodb-atlas] cluster.
-
-## Create a MongoDB cluster on MongoDB Atlas
-
-Register a free [MongoDB Atlas][mongodb-try] account for a cloud deployment:
-
-![MongoDB Atlas: register an account](./images/mongodb-atlas-01-register.png)
-
-Choose the free shared cluster plan:
-
-![MongoDB Atlas: choose the free plan](./images/mongodb-atlas-02-plan.png)
-
-Create a cluster if one has not already been created for you:
-
-![MongoDB Atlas: create a cluster](./images/mongodb-atlas-03-create-cluster.png)
-
-Configure your cluster. The provider and region are unimportant as long as you
-choose one that is free, but you should at least change the default name:
-
-![MongoDB Atlas: configure the cluster](./images/mongodb-atlas-04-configure-cluster.png)
-
-You must configure network access to your cluster to allow connections from the
-outside world:
-
-![MongoDB Atlas: configure network access](./images/mongodb-atlas-05-network-access.png)
-
-For the purposes of this guide, you can allow access from anywhere, which should
-set the access list entry to `0.0.0.0/0` (i.e. any source IP address is allowed
-to access the cluster):
-
-![MongoDB Atlas: allow access from anywhere](./images/mongodb-atlas-06-whitelist-ip.png)
-
-> In a real production environment, you should whitelist the exact IP addresses
-> of your servers so that only they can connect to your cluster, for improved
-> security.
-
-You must then create a database user to connect with:
-
-![MongoDB Atlas: configure database access](./images/mongodb-atlas-07-database-access.png)
-
-Set the credentials for the new database user:
-
-![MongoDB Atlas: add a database user](./images/mongodb-atlas-08-add-user.png)
-
-To obtain the connection URL for your cluster, go to Clusters and click on your
-cluster's Connect button:
-
-![MongoDB Atlas: connect to the cluster](./images/mongodb-atlas-09-connect.png)
-
-You want to connect an application:
-
-![MongoDB Atlas: connect your application](./images/mongodb-atlas-10-connect-app.png)
-
-And you are using a Node.js driver. You should copy the provided connection URL:
-
-![MongoDB Atlas: connect a Node.js application](./images/mongodb-atlas-11-connect-nodejs.png)
-
-Note that the connection URL is in the format
-`mongodb+srv://admin:<password>@your-cluster-name.abcd.mongodb.net/<dbname>?retryWrites=true&w=majority`.
-There are two placeholders in this URL, `<password>` and `<dbname>`, which you
-should replace:
-
-- `<password>` is the password of the database user you just created.
-- `<dbname>` is the name of a MongoDB database to connect to. You should name it
-  after your project. The exact name is unimportant, since MongoDB will
-  automatically create the database the first time you connect to it.
-
-> If you have the `mongo` executable available in your command line, you can
-> connect to your new MongoDB cluster from your machine with the command:
->
->     mongosh "mongodb+srv://admin:<password>@your-cluster-name.abcd.mongodb.net/<dbname>?retryWrites=true&w=majority"
->
-> (Use the full path to `mongo.exe` on Windows instead of `mongo`.)
 
 ## Provide your database URL to your Render application
 
