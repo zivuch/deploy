@@ -86,6 +86,10 @@ Connect your GitHub repository to Render by selecting the one the contains your 
 
 ![Render: connect to repo](./images/render-03-connect.png)
 
+If you can't see your reprepositories, click on `Configure account` and link your GitHub acount to Render.
+
+![Render: connect to repo](./images/render-003-connect.png)
+
 Name the application, choose the region and enter the commands used to build and start your app. The branch name should automatically be set to "main" or "master", depending on how your repository is setup.
 
 ![Render: setup your application](./images/render-04-setup.png)
