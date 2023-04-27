@@ -6,7 +6,7 @@ This guide will walk you through the process of deploying a NodeJS application i
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Requirements](#requirements)
-- [Create & Push to a Git repository](#create-&-a-git-repository)
+- [Create & Push to a Git repository](#create-&-push-to-a-git-repository)
 - [Deploy to Render](#deploy-to-render)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
