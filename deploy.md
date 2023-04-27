@@ -106,7 +106,7 @@ Add your `Key` `Value` variables
 
 ![Render: end the web service creation process](./images/render-0051-plans.png)
 
-You can copy your `.env` file by clicking on `Add Secret File`
+You can copy your `.env` file by clicking on `Add Secret File`, **remember not to copy your `PORT` variable**
 
 ![Render: end the web service creation process](./images/render-0052-plans.png)
 
