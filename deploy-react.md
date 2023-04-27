@@ -1,6 +1,6 @@
-# Deploy a NodeJS application with Render
+# Deploy a React application with Render
 
-This guide will walk you through the process of deploying a NodeJS application in the [cloud][cloud]. You will use [Render][render], a [Platform-as-a-Service][paas] cloud, to run your application;
+This guide will walk you through the process of deploying a React application in the [cloud][cloud]. You will use [Render][render], a [Platform-as-a-Service][paas] cloud, to run your application;
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -14,7 +14,7 @@ This guide will walk you through the process of deploying a NodeJS application i
 
 ## Requirements
 
-- [Node.js][node]
+- [React][react]
 - [Git][git]
 - A [GitHub][github] account
 - A [Render][render] account
@@ -25,13 +25,35 @@ To deploy code on Render, you will need to use [Git][git].
 
 Register a [GitHub][github] account if you haven't already.
 
-Add a `.gitignore` file to ignore the `node_modules` directory (dependencies
-will be automatically installed by Render when you push), `package-lock.json` file and `.env` file (if you have an .env file):
+Update the `.gitignore` file to ignore the `package-lock.json` file and `.env` file (if you have an .env file) (dependencies will be automatically installed by Render when you push) :
 
 The contents of your `.gitignore` file should look like this:
 
 ```txt
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
 /node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 package-lock.json
 # add this if you have an .env file
 .env
@@ -92,7 +114,7 @@ If you can't see your repositories, click on `Configure account` and link your G
 
 Name the application, choose the region and enter the commands used to build and start your app. The branch name should automatically be set to "main" or "master", depending on how your repository is setup.
 
-![Render: setup your application](./images/render-04-setup.png)
+![Render: setup your application](./images/render-045-setup.png)
 
 Select the `free plan`.
 
@@ -167,3 +189,4 @@ And you can deploy again
 [node]: https://nodejs.org
 [paas]: https://en.wikipedia.org/wiki/Platform_as_a_service
 [two-hard-things]: https://martinfowler.com/bliki/TwoHardThings.html
+[react]: https://react.dev
