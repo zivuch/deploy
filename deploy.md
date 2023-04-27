@@ -14,7 +14,7 @@ This guide will walk you through the process of deploying an NodeJS application 
 
 ## Requirements
 
-- [Node.js][node] 12+
+- [Node.js][node]
 - [Git][git]
 - A [GitHub][github] account
 - A [Render][render] account
